@@ -1,11 +1,7 @@
 package uk.me.michaellloydlee.applicationlock;
 
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class TestApplicationLock {
 
