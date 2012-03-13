@@ -12,7 +12,7 @@ class PingFileMonitor implements IPingFileMonitor {
     private final File pingFile;
     private final ApplicationStartupListener applicationStartupListener;
     private final Logger log = Logger.getLogger(getClass().getName());
-    private final Timer watcher = new Timer();
+    private final Timer watcher = new Timer("ApplicationLock.pingFileChecker", true);
     
     PingFileMonitor(File pingFile, ApplicationStartupListener applicationStartupListener) {
         this.pingFile = pingFile;
