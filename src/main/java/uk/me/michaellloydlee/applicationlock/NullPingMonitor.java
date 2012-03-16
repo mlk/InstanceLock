@@ -7,7 +7,7 @@ public class NullPingMonitor implements PingMonitor {
     }
 
     @Override
-    public void writeFile(String message) { }
+    public void sendMessage(String message) { }
 
     @Override
     public void forceCheck() { }

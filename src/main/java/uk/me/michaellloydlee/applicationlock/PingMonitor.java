@@ -3,7 +3,7 @@ package uk.me.michaellloydlee.applicationlock;
 interface PingMonitor {
     void start();
 
-    void writeFile(String message);
+    void sendMessage(String message);
 
     void forceCheck();
 

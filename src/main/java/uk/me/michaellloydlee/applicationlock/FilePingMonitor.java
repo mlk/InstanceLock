@@ -30,7 +30,7 @@ class FilePingMonitor implements PingMonitor {
     }
 
     @Override
-    public void writeFile(String message) {
+    public void sendMessage(String message) {
         try {
             FileUtil.writeFile(pingFile, message);
         } catch (IOException e) {

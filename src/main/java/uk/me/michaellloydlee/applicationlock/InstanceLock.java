@@ -58,7 +58,7 @@ public final class InstanceLock {
         boolean hasLock = tryLock();
 
         if(!hasLock && message != null) {
-            pingMonitor.writeFile(message);
+            pingMonitor.sendMessage(message);
         } else if (hasLock) {
             pingMonitor.start();
         }
