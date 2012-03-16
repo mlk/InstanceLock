@@ -5,7 +5,7 @@ Prevents two instances of the same application from starting.
 Usage
 -----
 
-    ApplicationLock lock = new ApplicationLock("application_name");
+    InstanceLock lock = new InstanceLock("application_name");
     if (!lock.onlyInstance()) {
         // Already running.
         System.exist(-1);
@@ -13,7 +13,7 @@ Usage
 
 If you want the second application to send data to the running application:
 
-    ApplicationLock lock = new ApplicationLock("application_name",
+    InstanceLock lock = new InstanceLock("application_name",
         new ApplicationStartupListener() {
             @Override
             public void applicationStartup(String message) {

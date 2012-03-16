@@ -7,7 +7,7 @@ public class TestApplicationLock {
 
     @Test
     public void whenTheFirstInstanceIsStartedThenApplicationIsNotLocked() {
-        ApplicationLock subject = new ApplicationLock("whenTheFirstInstanceIsStartedThenApplicationIsNotLocked");
+        InstanceLock subject = new InstanceLock("whenTheFirstInstanceIsStartedThenApplicationIsNotLocked");
 
         try {
         
@@ -19,24 +19,24 @@ public class TestApplicationLock {
 
     @Test
     public void whenTheSecondApplicationIsStartedTheApplicationIsLocked() {
-        ApplicationLock firstApplication = new ApplicationLock("whenTheSecondApplicationIsStartedTheApplicationIsLocked");
-        ApplicationLock subject = new ApplicationLock("whenTheSecondApplicationIsStartedTheApplicationIsLocked");
+        InstanceLock firstInstance = new InstanceLock("whenTheSecondApplicationIsStartedTheApplicationIsLocked");
+        InstanceLock subject = new InstanceLock("whenTheSecondApplicationIsStartedTheApplicationIsLocked");
 
         try {
-            firstApplication.onlyInstance();
+            firstInstance.onlyInstance();
 
             Assert.assertFalse(subject.onlyInstance());
         } finally {
-            firstApplication.closeInstance();
+            firstInstance.closeInstance();
         }
     }
 
     @Test
     public void whenTheFirstApplicationIsClosedTheSecondApplicationCanStart() {
-        ApplicationLock firstApplication = new ApplicationLock("whenTheFirstApplicationIsClosedTheSecondApplicationCanStart");
-        ApplicationLock subject = new ApplicationLock("whenTheFirstApplicationIsClosedTheSecondApplicationCanStart");
-        firstApplication.onlyInstance();
-        firstApplication.closeInstance();
+        InstanceLock firstInstance = new InstanceLock("whenTheFirstApplicationIsClosedTheSecondApplicationCanStart");
+        InstanceLock subject = new InstanceLock("whenTheFirstApplicationIsClosedTheSecondApplicationCanStart");
+        firstInstance.onlyInstance();
+        firstInstance.closeInstance();
         try {
 
             Assert.assertTrue(subject.onlyInstance());
@@ -48,34 +48,34 @@ public class TestApplicationLock {
     @Test
     public void whenTheApplicationSendsAMessageThenTheFirstMessageApplicationReceivesIt() {
         StoreApplicationStartupListener storage = new StoreApplicationStartupListener();
-        ApplicationLock firstApplication = new ApplicationLock("whenTheApplicationSendsAMessageThenTheFirstMessageApplicationReceivesIt", storage);
-        ApplicationLock secondApplication = new ApplicationLock("whenTheApplicationSendsAMessageThenTheFirstMessageApplicationReceivesIt", new NullApplicationStartupListener());
+        InstanceLock firstInstance = new InstanceLock("whenTheApplicationSendsAMessageThenTheFirstMessageApplicationReceivesIt", storage);
+        InstanceLock secondInstance = new InstanceLock("whenTheApplicationSendsAMessageThenTheFirstMessageApplicationReceivesIt", new NullApplicationStartupListener());
         try {
-            firstApplication.onlyInstance();
-            secondApplication.onlyInstance("commandLineArgument");
-            firstApplication.forceCheck();
+            firstInstance.onlyInstance();
+            secondInstance.onlyInstance("commandLineArgument");
+            firstInstance.forceCheck();
 
             Assert.assertEquals("commandLineArgument", storage.message);
         } finally {
-            firstApplication.closeInstance();
-            secondApplication.closeInstance();
+            firstInstance.closeInstance();
+            secondInstance.closeInstance();
         }
     }
 
     @Test
     public void whenTheApplicationDoesNotTakeAListenerThenMessageIsNotSent() {
         StoreApplicationStartupListener storage = new StoreApplicationStartupListener();
-        ApplicationLock firstApplication = new ApplicationLock("whenTheApplicationDoesNotTakeAListenerThenMessageIsNotSent", storage);
-        ApplicationLock secondApplication = new ApplicationLock("whenTheApplicationDoesNotTakeAListenerThenMessageIsNotSent");
+        InstanceLock firstInstance = new InstanceLock("whenTheApplicationDoesNotTakeAListenerThenMessageIsNotSent", storage);
+        InstanceLock secondInstance = new InstanceLock("whenTheApplicationDoesNotTakeAListenerThenMessageIsNotSent");
         try {
-            firstApplication.onlyInstance();
-            secondApplication.onlyInstance("commandLineArgument");
-            firstApplication.forceCheck();
+            firstInstance.onlyInstance();
+            secondInstance.onlyInstance("commandLineArgument");
+            firstInstance.forceCheck();
 
             Assert.assertNull(storage.message);
         } finally {
-            firstApplication.closeInstance();
-            secondApplication.closeInstance();
+            firstInstance.closeInstance();
+            secondInstance.closeInstance();
         }
     }
 
@@ -83,17 +83,17 @@ public class TestApplicationLock {
     @Test
     public void whenTheApplicationSendsAMessageThenTheFirstMessageApplicationReceivesItWithinTenSeconds() throws Exception {
         StoreApplicationStartupListener storage = new StoreApplicationStartupListener();
-        ApplicationLock firstApplication = new ApplicationLock("whenTheApplicationSendsAMessageThenTheFirstMessageApplicationReceivesItWithinTenSeconds", storage);
-        ApplicationLock secondApplication = new ApplicationLock("whenTheApplicationSendsAMessageThenTheFirstMessageApplicationReceivesItWithinTenSeconds", new NullApplicationStartupListener());
+        InstanceLock firstInstance = new InstanceLock("whenTheApplicationSendsAMessageThenTheFirstMessageApplicationReceivesItWithinTenSeconds", storage);
+        InstanceLock secondInstance = new InstanceLock("whenTheApplicationSendsAMessageThenTheFirstMessageApplicationReceivesItWithinTenSeconds", new NullApplicationStartupListener());
         try {
-            firstApplication.onlyInstance("");
-            secondApplication.onlyInstance("commandLineArgument");
+            firstInstance.onlyInstance("");
+            secondInstance.onlyInstance("commandLineArgument");
             Thread.sleep(10000);
 
             Assert.assertEquals("commandLineArgument", storage.message);
         } finally {
-            firstApplication.closeInstance();
-            secondApplication.closeInstance();
+            firstInstance.closeInstance();
+            secondInstance.closeInstance();
         }
     }
 }

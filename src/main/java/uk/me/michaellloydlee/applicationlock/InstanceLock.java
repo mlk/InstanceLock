@@ -10,7 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /** Prevents two instances of the application from starting at the same time. */
-public final class ApplicationLock {
+public final class InstanceLock {
     /** The file channel to be locked. */
     private FileChannel channel;
     /** The lock on the file. */
@@ -20,11 +20,11 @@ public final class ApplicationLock {
     private final IPingFileMonitor pingFileMonitor;
     private final Logger log = Logger.getLogger(getClass().getName());
 
-    public ApplicationLock(final String applicationName) {
+    public InstanceLock(final String applicationName) {
         this(applicationName, null);
     }
 
-    public ApplicationLock(String applicationName, ApplicationStartupListener applicationStartupListener) {
+    public InstanceLock(String applicationName, ApplicationStartupListener applicationStartupListener) {
         lockFile = createFile(applicationName, "lock");
 
         if (applicationStartupListener == null) {

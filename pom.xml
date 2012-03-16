@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>uk.me.michaell-loyd-lee</groupId>
+    <groupId>uk.me.michael-lloyd-lee</groupId>
     <artifactId>InstanceLock</artifactId>
     <version>1.0</version>
     <dependencies>
@@ -16,4 +16,7 @@
         </dependency>
     </dependencies>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 </project>
