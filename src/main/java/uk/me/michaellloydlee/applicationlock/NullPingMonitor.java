@@ -1,6 +1,6 @@
 package uk.me.michaellloydlee.applicationlock;
 
-public class NullPingFileMonitor implements IPingFileMonitor{
+public class NullPingMonitor implements PingMonitor {
     @Override
     public void start() {
 

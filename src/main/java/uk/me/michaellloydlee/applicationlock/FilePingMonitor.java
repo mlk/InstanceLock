@@ -7,14 +7,14 @@ import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-class PingFileMonitor implements IPingFileMonitor {
+class FilePingMonitor implements PingMonitor {
     /** The file updated when a second application requests and update. */
     private final File pingFile;
     private final ApplicationStartupListener applicationStartupListener;
     private final Logger log = Logger.getLogger(getClass().getName());
     private final Timer watcher = new Timer("InstanceLock.pingFileChecker", true);
-    
-    PingFileMonitor(File pingFile, ApplicationStartupListener applicationStartupListener) {
+
+    FilePingMonitor(File pingFile, ApplicationStartupListener applicationStartupListener) {
         this.pingFile = pingFile;
         this.applicationStartupListener = applicationStartupListener;
     }

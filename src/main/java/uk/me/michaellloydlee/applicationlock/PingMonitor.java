@@ -1,6 +1,6 @@
 package uk.me.michaellloydlee.applicationlock;
 
-interface IPingFileMonitor {
+interface PingMonitor {
     void start();
 
     void writeFile(String message);

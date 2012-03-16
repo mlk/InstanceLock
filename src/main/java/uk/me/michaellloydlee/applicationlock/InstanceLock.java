@@ -17,7 +17,7 @@ public final class InstanceLock {
     private FileLock lock;
     /** The file to be locked. */
     private final File lockFile;
-    private final IPingFileMonitor pingFileMonitor;
+    private final PingMonitor pingMonitor;
     private final Logger log = Logger.getLogger(getClass().getName());
 
     public InstanceLock(final String applicationName) {
@@ -28,9 +28,9 @@ public final class InstanceLock {
         lockFile = createFile(applicationName, "lock");
 
         if (applicationStartupListener == null) {
-            pingFileMonitor = new NullPingFileMonitor();
+            pingMonitor = new NullPingMonitor();
         } else {
-            pingFileMonitor = new PingFileMonitor(createFile(applicationName, "ping"), applicationStartupListener);
+            pingMonitor = new FilePingMonitor(createFile(applicationName, "ping"), applicationStartupListener);
         }
     }
     
@@ -58,9 +58,9 @@ public final class InstanceLock {
         boolean hasLock = tryLock();
 
         if(!hasLock && message != null) {
-            pingFileMonitor.writeFile(message);
+            pingMonitor.writeFile(message);
         } else if (hasLock) {
-            pingFileMonitor.start();
+            pingMonitor.start();
         }
         
         return hasLock;
@@ -81,14 +81,14 @@ public final class InstanceLock {
             }
 
             lockFile.delete();
-            pingFileMonitor.stop();
+            pingMonitor.stop();
         } catch (final IOException e) {
             log.log(Level.INFO, "Failed to unlock file.", e);
         }
     }
 
     public void forceCheck() {
-        pingFileMonitor.forceCheck();
+        pingMonitor.forceCheck();
     }
 
     private boolean tryLock() {
