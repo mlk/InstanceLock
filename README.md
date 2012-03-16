@@ -1,4 +1,4 @@
-Application Lock
+Instance Lock
 ================
 Prevents two instances of the same application from starting.
 
