@@ -81,14 +81,14 @@ public class TestInstanceLock {
 
 
     @Test
-    public void whenTheApplicationSendsAMessageThenTheFirstMessageApplicationReceivesItWithinTenSeconds() throws Exception {
+    public void whenTheApplicationSendsAMessageThenTheFirstMessageApplicationReceivesItWithinThreeSeconds() throws Exception {
         StoreApplicationStartupListener storage = new StoreApplicationStartupListener();
-        InstanceLock firstInstance = new InstanceLock("whenTheApplicationSendsAMessageThenTheFirstMessageApplicationReceivesItWithinTenSeconds", storage);
-        InstanceLock secondInstance = new InstanceLock("whenTheApplicationSendsAMessageThenTheFirstMessageApplicationReceivesItWithinTenSeconds", new NullApplicationStartupListener());
+        InstanceLock firstInstance = new InstanceLock("whenTheApplicationSendsAMessageThenTheFirstMessageApplicationReceivesItWithinThreeSeconds", storage);
+        InstanceLock secondInstance = new InstanceLock("whenTheApplicationSendsAMessageThenTheFirstMessageApplicationReceivesItWithinThreeSeconds", new NullApplicationStartupListener());
         try {
             firstInstance.onlyInstance("");
             secondInstance.onlyInstance("commandLineArgument");
-            Thread.sleep(10000);
+            Thread.sleep(3000);
 
             Assert.assertEquals("commandLineArgument", storage.message);
         } finally {
