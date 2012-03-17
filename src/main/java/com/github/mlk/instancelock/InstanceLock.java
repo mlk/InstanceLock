@@ -1,4 +1,4 @@
-package uk.me.michaellloydlee.applicationlock;
+package com.github.mlk.instancelock;
 
 import java.io.File;
 import java.io.IOException;

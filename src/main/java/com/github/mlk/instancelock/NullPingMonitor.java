@@ -1,4 +1,4 @@
-package uk.me.michaellloydlee.applicationlock;
+package com.github.mlk.instancelock;
 
 public class NullPingMonitor implements PingMonitor {
     @Override

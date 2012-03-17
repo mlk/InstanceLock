@@ -1,4 +1,4 @@
-package uk.me.michaellloydlee.applicationlock;
+package com.github.mlk.instancelock;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,11 +10,11 @@ import java.util.logging.Logger;
 class FilePingMonitor implements PingMonitor {
     /** The file updated when a second application requests and update. */
     private final File pingFile;
-    private final ApplicationStartupListener applicationStartupListener;
+    private final com.github.mlk.instancelock.ApplicationStartupListener applicationStartupListener;
     private final Logger log = Logger.getLogger(getClass().getName());
     private final Timer watcher = new Timer("InstanceLock.pingFileChecker", true);
 
-    FilePingMonitor(File pingFile, ApplicationStartupListener applicationStartupListener) {
+    FilePingMonitor(File pingFile, com.github.mlk.instancelock.ApplicationStartupListener applicationStartupListener) {
         this.pingFile = pingFile;
         this.applicationStartupListener = applicationStartupListener;
     }

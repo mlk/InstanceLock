@@ -1,16 +1,16 @@
-package uk.me.michaellloydlee.applicationlock;
+package com.github.mlk.instancelock;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-public class TestApplicationLock {
+public class TestInstanceLock {
 
     @Test
     public void whenTheFirstInstanceIsStartedThenApplicationIsNotLocked() {
         InstanceLock subject = new InstanceLock("whenTheFirstInstanceIsStartedThenApplicationIsNotLocked");
 
         try {
-        
+
             Assert.assertTrue(subject.onlyInstance());
         } finally {
             subject.closeInstance();

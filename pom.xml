@@ -4,9 +4,34 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>uk.me.michael-lloyd-lee</groupId>
+    <groupId>com.github.mlk</groupId>
     <artifactId>InstanceLock</artifactId>
+    <packaging>jar</packaging>
+    <name>InstanceLock</name>
     <version>1.0</version>
+    <description>Prevents two instances of an application from starting.</description>
+    <url>http://mlk.github.com/InstanceLock/</url>
+    <licenses>
+        <license>
+            <name>Modified BSD License</name>
+            <url>https://raw.github.com/mlk/InstanceLock/master/license.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <scm>
+        <url>https://github.com/mlk/InstanceLock</url>
+    </scm>
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/mlk/InstanceLock/issues</url>
+    </issueManagement>
+    <developers>
+        <developer>
+            <id>mlk</id>
+            <name>Michael Lloyd Lee</name>
+            <email>pom@michael-lloyd-lee.me.uk</email>
+        </developer>
+    </developers>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
