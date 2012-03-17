@@ -1,16 +1,15 @@
 package com.github.mlk.instancelock;
 
-public class NullPingMonitor implements PingMonitor {
+/** No op monitor. */
+class NullPingMonitor implements PingMonitor {
     @Override
-    public void start() {
-
-    }
+    public void start() { }
 
     @Override
     public void sendMessage(String message) { }
 
     @Override
-    public void forceCheck() { }
+    public void check() { }
 
     @Override
     public void stop() { }

@@ -7,10 +7,10 @@ import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/** Monitors for updates from second instances of the application starting up by using a common file to communicate. */
 class FilePingMonitor implements PingMonitor {
-    /** The file updated when a second application requests and update. */
     private final File pingFile;
-    private final com.github.mlk.instancelock.ApplicationStartupListener applicationStartupListener;
+    private final ApplicationStartupListener applicationStartupListener;
     private final Logger log = Logger.getLogger(getClass().getName());
     private final Timer watcher = new Timer("InstanceLock.pingFileChecker", true);
 
@@ -24,7 +24,7 @@ class FilePingMonitor implements PingMonitor {
         watcher.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                forceCheck();
+                check();
             }
         }, 2500, 2500);
     }
@@ -40,7 +40,7 @@ class FilePingMonitor implements PingMonitor {
 
 
     @Override
-    public void forceCheck() {
+    public void check() {
         if (pingFile.exists()) {
             String content = null;
             try {

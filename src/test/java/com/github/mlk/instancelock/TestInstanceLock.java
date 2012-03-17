@@ -49,7 +49,7 @@ public class TestInstanceLock {
     public void whenTheApplicationSendsAMessageThenTheFirstMessageApplicationReceivesIt() {
         StoreApplicationStartupListener storage = new StoreApplicationStartupListener();
         InstanceLock firstInstance = new InstanceLock("whenTheApplicationSendsAMessageThenTheFirstMessageApplicationReceivesIt", storage);
-        InstanceLock secondInstance = new InstanceLock("whenTheApplicationSendsAMessageThenTheFirstMessageApplicationReceivesIt", new NullApplicationStartupListener());
+        InstanceLock secondInstance = new InstanceLock("whenTheApplicationSendsAMessageThenTheFirstMessageApplicationReceivesIt", new StoreApplicationStartupListener());
         try {
             firstInstance.onlyInstance();
             secondInstance.onlyInstance("commandLineArgument");
@@ -84,7 +84,7 @@ public class TestInstanceLock {
     public void whenTheApplicationSendsAMessageThenTheFirstMessageApplicationReceivesItWithinThreeSeconds() throws Exception {
         StoreApplicationStartupListener storage = new StoreApplicationStartupListener();
         InstanceLock firstInstance = new InstanceLock("whenTheApplicationSendsAMessageThenTheFirstMessageApplicationReceivesItWithinThreeSeconds", storage);
-        InstanceLock secondInstance = new InstanceLock("whenTheApplicationSendsAMessageThenTheFirstMessageApplicationReceivesItWithinThreeSeconds", new NullApplicationStartupListener());
+        InstanceLock secondInstance = new InstanceLock("whenTheApplicationSendsAMessageThenTheFirstMessageApplicationReceivesItWithinThreeSeconds", new StoreApplicationStartupListener());
         try {
             firstInstance.onlyInstance("");
             secondInstance.onlyInstance("commandLineArgument");
@@ -95,20 +95,6 @@ public class TestInstanceLock {
             firstInstance.closeInstance();
             secondInstance.closeInstance();
         }
-    }
-}
-
-class NullApplicationStartupListener implements ApplicationStartupListener {
-    @Override
-    public void applicationStartup(String message) {
-    }
-}
-
-class StoreApplicationStartupListener implements ApplicationStartupListener {
-    String message = null;
-    @Override
-    public void applicationStartup(String message) {
-        this.message = message;
     }
 }
 

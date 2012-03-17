@@ -2,7 +2,8 @@ package com.github.mlk.instancelock;
 
 import java.io.*;
 
-/** I want to make sure this API as light as I can, so no dependencies. :sigh: */
+/** Basic file operations. I am not using commons IO or the like as
+ * I don't want to have any dependencies for using this API. */
 class FileUtil {
     static String readFully(File file) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -18,7 +19,13 @@ class FileUtil {
             reader.close();
         }
     }
-    
+
+    /** Atomic write to a file. In order to do this it first writes the content to a temp file then moves.
+     *
+     * @param file The destination file.
+     * @param content The content to write
+     * @throws IOException Any exceptions while writing the file.
+     */
     static void writeFile(File file, String content) throws IOException {
         File tmpFile = new File(file.getParent(), file.getName() + ".tmp");
         BufferedWriter writer = new BufferedWriter(new FileWriter(tmpFile));
@@ -28,6 +35,9 @@ class FileUtil {
         } finally {
             writer.close();
         }
-        tmpFile.renameTo(file);
+
+        if (!tmpFile.renameTo(file)) {
+            throw new IOException("Failed to rename file: " + tmpFile.getName() + " to " + file.getName());
+        }
     }
 }
