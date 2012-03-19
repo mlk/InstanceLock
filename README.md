@@ -41,6 +41,6 @@ Note: You need to pass a string.
 
 [download]: https://github.com/mlk/InstanceLock/downloads "Download JAR, source and docs from GitHub"
 [InstanceLock.api]: http://mlk.github.com/InstanceLock/apidocs/com/github/mlk/instancelock/InstanceLock.html "API docs"
-[InstanceLock.java]: https://github.com/mlk/InstanceLock/blob/master/src/main/java/com/github/mlk/instancelock/InstanceLock.java "InstanceLock Source"
+[InstanceLock.java]: https://github.com/mlk/InstanceLock/blob/master/src/main/java/com/github/mlk/instancelock/InstanceLock.java "InstanceLock source"
 [ApplicationStartupListener.api]: http://mlk.github.com/InstanceLock/apidocs/com/github/mlk/instancelock/ApplicationStartupListener.html "API docs"
-[ApplicationStartupListener.java]: https://github.com/mlk/InstanceLock/blob/master/src/main/java/com/github/mlk/instancelock/ApplicationStartupListener.java "ApplicationStartupListener Source"
+[ApplicationStartupListener.java]: https://github.com/mlk/InstanceLock/blob/master/src/main/java/com/github/mlk/instancelock/ApplicationStartupListener.java "ApplicationStartupListener source"
