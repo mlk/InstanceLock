@@ -18,7 +18,6 @@
         </license>
     </licenses>
 
-
     <scm>
         <connection>scm:git:http://github.com/mlk/InstanceLock.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/mlk/InstanceLock.git</developerConnection>
