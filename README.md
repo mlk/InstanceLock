@@ -14,7 +14,7 @@ Grab the JAR file either [manually][download] or via Maven.
         </dependency>
     </dependencies>
 
-Then during application start up create an [`InstanceLock`][InstanceLock.api] [¹][InstanceLock.java] and check `onlyInstance()`.
+Then during application start up create an [`InstanceLock`][InstanceLock.api][¹][InstanceLock.java] and check `onlyInstance()`.
 
     InstanceLock lock = new InstanceLock("application_name");
     if (!lock.onlyInstance()) {
@@ -22,7 +22,8 @@ Then during application start up create an [`InstanceLock`][InstanceLock.api] [�
         System.exist(-1);
     }
 
-If you want the second application to send data to the running application create an [`ApplicationStartupListener`][ApplicationStartupListener.api] [²][ApplicationStartupListener.java] and pass it into the constructor of the InstanceLock. `applicationStartup(String)` will be called when a second instance of the application is started.
+If you want the second application to send data to the running application create an [`ApplicationStartupListener`][ApplicationStartupListener.api][²][ApplicationStartupListener.java] and pass it into the constructor of the InstanceLock. `applicationStartup(String)` will be called when a second instance of the application is started.
+Note: You need to pass a string.
 
     InstanceLock lock = new InstanceLock("application_name",
         new ApplicationStartupListener() {
