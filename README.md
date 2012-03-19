@@ -14,7 +14,7 @@ Grab the JAR file either [manually][download] or via Maven.
         </dependency>
     </dependencies>
 
-Then during application start up create an [`InstanceLock`][InstanceLock.java] and check `onlyInstance()`.
+Then during application start up create an [`InstanceLock`][InstanceLock.api] [¹][InstanceLock.java] and check `onlyInstance()`.
 
     InstanceLock lock = new InstanceLock("application_name");
     if (!lock.onlyInstance()) {
@@ -22,7 +22,7 @@ Then during application start up create an [`InstanceLock`][InstanceLock.java] a
         System.exist(-1);
     }
 
-If you want the second application to send data to the running application create an [`ApplicationStartupListener`][ApplicationStartupListener.java] and pass it into the constructor of the InstanceLock. `applicationStartup(String)` will be called when a second instance of the application is started.
+If you want the second application to send data to the running application create an [`ApplicationStartupListener`][ApplicationStartupListener.api] [²][ApplicationStartupListener.java] and pass it into the constructor of the InstanceLock. `applicationStartup(String)` will be called when a second instance of the application is started.
 
     InstanceLock lock = new InstanceLock("application_name",
         new ApplicationStartupListener() {
@@ -39,5 +39,7 @@ If you want the second application to send data to the running application creat
 
 
 [download]: https://github.com/mlk/InstanceLock/downloads "Download JAR, source and docs from GitHub"
+[InstanceLock.api]: http://mlk.github.com/InstanceLock/apidocs/com/github/mlk/instancelock/InstanceLock.html "API docs"
 [InstanceLock.java]: https://github.com/mlk/InstanceLock/blob/master/src/main/java/com/github/mlk/instancelock/InstanceLock.java "InstanceLock Source"
+[ApplicationStartupListener.api]: http://mlk.github.com/InstanceLock/apidocs/com/github/mlk/instancelock/ApplicationStartupListener.html "API docs"
 [ApplicationStartupListener.java]: https://github.com/mlk/InstanceLock/blob/master/src/main/java/com/github/mlk/instancelock/ApplicationStartupListener.java "ApplicationStartupListener Source"
