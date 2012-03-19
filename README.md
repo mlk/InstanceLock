@@ -14,7 +14,7 @@ Grab the JAR file either [manually](https://github.com/mlk/InstanceLock/download
         </dependency>
     </dependencies>
 
-Then during application start up create an `[InstanceLock](https://github.com/mlk/InstanceLock/blob/master/src/main/java/com/github/mlk/instancelock/InstanceLock.java)` and check `onlyInstance()`.
+Then during application start up create an [`InstanceLock`](https://github.com/mlk/InstanceLock/blob/master/src/main/java/com/github/mlk/instancelock/InstanceLock.java) and check `onlyInstance()`.
 
     InstanceLock lock = new InstanceLock("application_name");
     if (!lock.onlyInstance()) {
