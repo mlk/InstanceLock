@@ -8,7 +8,7 @@
     <artifactId>InstanceLock</artifactId>
     <packaging>jar</packaging>
     <name>InstanceLock</name>
-    <version>1.0</version>
+    <version>1.0-SNAPSHOT</version>
     <description>Prevents two instances of an application from starting.</description>
     <url>http://mlk.github.com/InstanceLock/</url>
 
@@ -20,8 +20,11 @@
         </license>
     </licenses>
 
+
     <scm>
-        <url>https://github.com/mlk/InstanceLock</url>
+        <connection>scm:git:http://github.com/mlk/InstanceLock.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/mlk/InstanceLock.git</developerConnection>
+        <url>http://github.com/mlk/InstanceLock</url>
     </scm>
 
     <issueManagement>
