@@ -1,13 +1,17 @@
 package com.github.mlk.instancelock;
 
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestName;
 
 public class TestInstanceLock {
-
+    @Rule
+    public TestName name = new TestName();
+    
     @Test
     public void whenTheFirstInstanceIsStartedThenApplicationIsNotLocked() {
-        InstanceLock subject = new InstanceLock("whenTheFirstInstanceIsStartedThenApplicationIsNotLocked");
+        InstanceLock subject = new InstanceLock(name.getMethodName());
 
         try {
 
@@ -19,8 +23,8 @@ public class TestInstanceLock {
 
     @Test
     public void whenTheSecondApplicationIsStartedTheApplicationIsLocked() {
-        InstanceLock firstInstance = new InstanceLock("whenTheSecondApplicationIsStartedTheApplicationIsLocked");
-        InstanceLock subject = new InstanceLock("whenTheSecondApplicationIsStartedTheApplicationIsLocked");
+        InstanceLock firstInstance = new InstanceLock(name.getMethodName());
+        InstanceLock subject = new InstanceLock(name.getMethodName());
 
         try {
             firstInstance.onlyInstance();
@@ -33,8 +37,8 @@ public class TestInstanceLock {
 
     @Test
     public void whenTheFirstApplicationIsClosedTheSecondApplicationCanStart() {
-        InstanceLock firstInstance = new InstanceLock("whenTheFirstApplicationIsClosedTheSecondApplicationCanStart");
-        InstanceLock subject = new InstanceLock("whenTheFirstApplicationIsClosedTheSecondApplicationCanStart");
+        InstanceLock firstInstance = new InstanceLock(name.getMethodName());
+        InstanceLock subject = new InstanceLock(name.getMethodName());
         firstInstance.onlyInstance();
         firstInstance.closeInstance();
         try {
@@ -48,8 +52,8 @@ public class TestInstanceLock {
     @Test
     public void whenTheApplicationSendsAMessageThenTheFirstMessageApplicationReceivesIt() {
         StoreApplicationStartupListener storage = new StoreApplicationStartupListener();
-        InstanceLock firstInstance = new InstanceLock("whenTheApplicationSendsAMessageThenTheFirstMessageApplicationReceivesIt", storage);
-        InstanceLock secondInstance = new InstanceLock("whenTheApplicationSendsAMessageThenTheFirstMessageApplicationReceivesIt", new StoreApplicationStartupListener());
+        InstanceLock firstInstance = new InstanceLock(name.getMethodName(), storage);
+        InstanceLock secondInstance = new InstanceLock(name.getMethodName(), new StoreApplicationStartupListener());
         try {
             firstInstance.onlyInstance();
             secondInstance.onlyInstance("commandLineArgument");
@@ -65,8 +69,8 @@ public class TestInstanceLock {
     @Test
     public void whenTheApplicationDoesNotTakeAListenerThenMessageIsNotSent() {
         StoreApplicationStartupListener storage = new StoreApplicationStartupListener();
-        InstanceLock firstInstance = new InstanceLock("whenTheApplicationDoesNotTakeAListenerThenMessageIsNotSent", storage);
-        InstanceLock secondInstance = new InstanceLock("whenTheApplicationDoesNotTakeAListenerThenMessageIsNotSent");
+        InstanceLock firstInstance = new InstanceLock(name.getMethodName(), storage);
+        InstanceLock secondInstance = new InstanceLock(name.getMethodName());
         try {
             firstInstance.onlyInstance();
             secondInstance.onlyInstance("commandLineArgument");
@@ -83,8 +87,8 @@ public class TestInstanceLock {
     @Test
     public void whenTheApplicationSendsAMessageThenTheFirstMessageApplicationReceivesItWithinThreeSeconds() throws Exception {
         StoreApplicationStartupListener storage = new StoreApplicationStartupListener();
-        InstanceLock firstInstance = new InstanceLock("whenTheApplicationSendsAMessageThenTheFirstMessageApplicationReceivesItWithinThreeSeconds", storage);
-        InstanceLock secondInstance = new InstanceLock("whenTheApplicationSendsAMessageThenTheFirstMessageApplicationReceivesItWithinThreeSeconds", new StoreApplicationStartupListener());
+        InstanceLock firstInstance = new InstanceLock(name.getMethodName(), storage);
+        InstanceLock secondInstance = new InstanceLock(name.getMethodName(), new StoreApplicationStartupListener());
         try {
             firstInstance.onlyInstance("");
             secondInstance.onlyInstance("commandLineArgument");
